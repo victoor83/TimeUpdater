@@ -23,7 +23,8 @@ namespace TimeUpdater
         {
             CreateBackupFile();
 
-            List<string> lines = File.ReadAllLines(FilePaths.TimeFilePath).ToList();
+            //Save new times to broker file
+            List<string> lines = File.ReadAllLines(FilePaths.BrokerTimeFile).ToList();
 
             int i = 0;
             foreach(var dateTime in dateTimes)
@@ -35,7 +36,10 @@ namespace TimeUpdater
                 i++;
             }
 
-            File.WriteAllLines(FilePaths.TimeFilePath, lines);
+            File.WriteAllLines(FilePaths.BrokerTimeFile, lines);
+
+            //Copy broker file to WordTimeRecorder
+            File.Copy(FilePaths.BrokerTimeFile, FilePaths.TimeFilePath, true);
         }
 
         private string GetTimeLine(double eventTime, TimeType timeType)
@@ -46,7 +50,7 @@ namespace TimeUpdater
         private void CreateBackupFile()
         {
             var timeFile = Path.Combine(FilePaths.BackupFileFolder, $"{Resources.ResourceManager.GetString("TimeFileName")}_{DateTime.Now:dd_MM_yyyy}");
-            File.Copy(FilePaths.TimeFilePath, Path.Combine(FilePaths.BackupFileFolder, timeFile));
+            File.Copy(FilePaths.TimeFilePath, Path.Combine(FilePaths.BackupFileFolder, timeFile), true);
         }
 
         private Paths LoadConfigFile()

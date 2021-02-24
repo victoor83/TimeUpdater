@@ -21,6 +21,7 @@ namespace TimeUpdater
             _filesManager = new FilesManager();
             labFilePath.Content = _filesManager.FilePaths.TimeFilePath;
             labBackupFolder.Content = _filesManager.FilePaths.BackupFileFolder;
+            labBrokerFilePath.Content = _filesManager.FilePaths.BrokerTimeFile;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,6 +36,8 @@ namespace TimeUpdater
             {
                 _filesManager.SaveTimesForSingleDay(TimeConverter.ConvertToUnixDateTime(GetDateTimes()));
             }
+
+            MessageBox.Show($"Success for date {datetime}!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void SetDefaultDate()
