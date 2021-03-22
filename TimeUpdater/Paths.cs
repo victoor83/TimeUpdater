@@ -10,5 +10,7 @@
         /// The changes will be saved first here, because target time file is overriden during start by program
         /// </summary>
         public string BrokerTimeFile { get; set; }
+
+        public string ExcelTimeFile { get; set; }
     }
 }

@@ -27,5 +27,13 @@ namespace TimeUpdater
 
             return localDateTime;
         }
+
+        public static double CalculateDailyTime(List<DateTime> dateTimes)
+        {
+            TimeSpan timeMorning = dateTimes[1] - dateTimes[0];
+            TimeSpan timeAfternoon = dateTimes[3] - dateTimes[2];
+
+            return Math.Round(timeMorning.TotalHours + timeAfternoon.TotalHours, 2);
+        }
     }
 }

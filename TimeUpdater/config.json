@@ -1,5 +1,6 @@
 {
   "TimeFilePath": "d:/WorkTimeRecorder/EventsFile.xml",
   "BackupFileFolder": "D:/Data/Backup/readytime/backup",
-  "BrokerTimeFile": "D:/Data/Backup/readytime/EventsFile.xml"
+  "BrokerTimeFile": "D:/Data/Backup/readytime/EventsFile.xml",
+  "ExcelTimeFile": "C:/Users/z003e4fx/Desktop/time.xlsx"
 }

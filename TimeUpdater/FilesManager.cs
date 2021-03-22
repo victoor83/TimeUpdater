@@ -49,7 +49,10 @@ namespace TimeUpdater
 
         private void CreateBackupFile()
         {
-            var timeFile = Path.Combine(FilePaths.BackupFileFolder, $"{Resources.ResourceManager.GetString("TimeFileName")}_{DateTime.Now:dd_MM_yyyy}");
+            FileInfo fInfo = new FileInfo(Resources.ResourceManager.GetString("TimeFileName"));
+            var fileName = Path.GetFileNameWithoutExtension(fInfo.Name);
+
+            var timeFile = Path.Combine(FilePaths.BackupFileFolder, $"{fileName}_{DateTime.Now:dd_MM_yyyy}{fInfo.Extension}");
             File.Copy(FilePaths.TimeFilePath, Path.Combine(FilePaths.BackupFileFolder, timeFile), true);
         }
 

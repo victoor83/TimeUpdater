@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:TimeUpdater"
         mc:Ignorable="d"
         Title="Time Updater" SizeToContent="WidthAndHeight">
+
     <Grid Height="264" Width="662" >
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Actions">
+                    <MenuItem Header="_Open excel time" Click="mnuExcel_Click"/>
+                    <Separator />
+                    <MenuItem Header="_Exit" />
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
         <Button Content="Add time" HorizontalAlignment="Left" Margin="14,176,0,0" VerticalAlignment="Top" Height="59" Width="110" Click="Button_Click"/>
         <DatePicker x:Name="Dp_Date" HorizontalAlignment="Right" Margin="0,0,500,217" VerticalAlignment="Bottom"/>
         <local:TimeControl x:Name="UcStart" Margin="16,0,0,142" Height="53" HorizontalAlignment="Left" Width="138" VerticalAlignment="Bottom"/>

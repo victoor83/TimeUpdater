@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 
 namespace TimeUpdater
@@ -31,13 +33,29 @@ namespace TimeUpdater
             if(datetime == null)
             {
                 MessageBox.Show("Date is not selected.", "Time error", MessageBoxButton.OK, MessageBoxImage.Hand);
+                return;
+            }
+
+            _filesManager.SaveTimesForSingleDay(TimeConverter.ConvertToUnixDateTime(GetDateTimes()));
+
+            var workTime = TimeConverter.CalculateDailyTime(GetDateTimes());
+
+            MessageBox.Show($"Success for date {datetime}! Total working time is: {workTime} h.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void mnuExcel_Click(object sender, RoutedEventArgs e)
+        {
+            FileInfo fi = new FileInfo(_filesManager.FilePaths.ExcelTimeFile);
+            if(fi.Exists)
+            {
+                var p = new Process();
+                p.StartInfo = new ProcessStartInfo(_filesManager.FilePaths.ExcelTimeFile) {UseShellExecute = true,};
+                p.Start();
             }
             else
             {
-                _filesManager.SaveTimesForSingleDay(TimeConverter.ConvertToUnixDateTime(GetDateTimes()));
+                MessageBox.Show($"Excel file with path '{_filesManager.FilePaths.ExcelTimeFile}' given in config file doesn't exist");
             }
-
-            MessageBox.Show($"Success for date {datetime}!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void SetDefaultDate()
