@@ -36,11 +36,19 @@ namespace TimeUpdater
                 return;
             }
 
-            _filesManager.SaveTimesForSingleDay(TimeConverter.ConvertToUnixDateTime(GetDateTimes()));
+            var dateTimes = GetDateTimes();
+            var workTime = TimeConverter.CalculateDailyTime(dateTimes);
 
-            var workTime = TimeConverter.CalculateDailyTime(GetDateTimes());
-
-            MessageBox.Show($"Success for date {datetime}! Total working time is: {workTime} h.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            if(MessageBox.Show($"Save the date {datetime.Value:dd/MM/yyyy} with total working time {workTime} h ?", "Save these times", MessageBoxButton.YesNo,
+                MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                _filesManager.SaveTimesForSingleDay(TimeConverter.ConvertToUnixDateTime(dateTimes));
+                MessageBox.Show($"Success for date {datetime.Value:dd/MM/yyyy}! Total working time is: {workTime} h.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Canceled!");
+            }
         }
 
         private void mnuExcel_Click(object sender, RoutedEventArgs e)
