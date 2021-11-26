@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
+using System.Windows;
 using Newtonsoft.Json;
 
 namespace TimeUpdater
@@ -19,27 +20,38 @@ namespace TimeUpdater
 
         public Paths FilePaths { get; }
 
-        public void SaveTimesForSingleDay(List<double> dateTimes)
+        public bool SaveTimesForSingleDay(List<double> dateTimes)
         {
-            CreateBackupFile();
-
-            //Save new times to broker file
-            List<string> lines = File.ReadAllLines(FilePaths.BrokerTimeFile).ToList();
-
-            int i = 0;
-            foreach(var dateTime in dateTimes)
+            try
             {
-                TimeType timeType = (i == 0 || i == 2) ? TimeType.Start : TimeType.Stop;
+                CreateBackupFile();
 
-                lines.Insert(lines.Count - 1, GetTimeLine(dateTime, timeType));
+                //Save new times to broker file
+                List<string> lines = File.ReadAllLines(FilePaths.BrokerTimeFile).ToList();
 
-                i++;
+                int i = 0;
+                foreach (var dateTime in dateTimes)
+                {
+                    TimeType timeType = (i == 0 || i == 2) ? TimeType.Start : TimeType.Stop;
+
+                    lines.Insert(lines.Count - 1, GetTimeLine(dateTime, timeType));
+
+                    i++;
+                }
+
+                File.WriteAllLines(FilePaths.BrokerTimeFile, lines);
+
+                //Copy broker file to WordTimeRecorder
+                File.Copy(FilePaths.BrokerTimeFile, FilePaths.TimeFilePath, true);
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            File.WriteAllLines(FilePaths.BrokerTimeFile, lines);
-
-            //Copy broker file to WordTimeRecorder
-            File.Copy(FilePaths.BrokerTimeFile, FilePaths.TimeFilePath, true);
+            return false;
         }
 
         private string GetTimeLine(double eventTime, TimeType timeType)
@@ -49,6 +61,7 @@ namespace TimeUpdater
 
         private void CreateBackupFile()
         {
+   
             FileInfo fInfo = new FileInfo(Resources.ResourceManager.GetString("TimeFileName"));
             var fileName = Path.GetFileNameWithoutExtension(fInfo.Name);
 
