@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Documents;
+using System.Windows.Navigation;
 
 namespace TimeUpdater
 {
@@ -34,6 +35,35 @@ namespace TimeUpdater
             TimeSpan timeAfternoon = dateTimes[3] - dateTimes[2];
 
             return Math.Round(timeMorning.TotalHours + timeAfternoon.TotalHours, 2);
+        }
+
+        /// <summary>
+        /// Convert e.g.time to int araray with hours and minutes.
+        /// E.g 07:43  =>  [7,43]
+        /// </summary>
+        /// <param name="time">e.g  '07:43'</param>
+        /// <returns>array [0] => hours  array [1] => minutes</returns>
+        public static int[] ConvertTimeToNumbers(string time)
+        {
+            var hoursMinutesStrings = time.Split(":");
+
+            if(hoursMinutesStrings.Length == 2)
+            {
+                try
+                {
+                    var hoursMinutesIntegers = new int[2];
+                    hoursMinutesIntegers[0] = Convert.ToInt32(hoursMinutesStrings[0]);
+                    hoursMinutesIntegers[1] = Convert.ToInt32(hoursMinutesStrings[1]);
+                    return hoursMinutesIntegers;
+                }
+                catch
+                {
+                    ;
+                    throw;
+                }
+            }
+
+            return null;
         }
     }
 }

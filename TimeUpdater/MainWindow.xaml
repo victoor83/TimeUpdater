@@ -8,27 +8,33 @@
         Title="Time Updater" SizeToContent="WidthAndHeight">
 
     <Grid Height="264" Width="662" >
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="31*"/>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="283*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.ColumnSpan="3">
+            <Menu DockPanel.Dock="Top" Background="White">
                 <MenuItem Header="_Actions">
                     <MenuItem Header="_Open excel time" Click="mnuExcel_Click"/>
                     <Separator />
                     <MenuItem Header="_Exit" />
                 </MenuItem>
             </Menu>
-            <TextBox AcceptsReturn="True" />
         </DockPanel>
-        <Button Content="Add time" HorizontalAlignment="Left" Margin="14,176,0,0" VerticalAlignment="Top" Height="59" Width="110" Click="Button_Click"/>
-        <DatePicker x:Name="Dp_Date" HorizontalAlignment="Right" Margin="0,0,500,217" VerticalAlignment="Bottom"/>
-        <local:TimeControl x:Name="UcStart" Margin="16,0,0,142" Height="53" HorizontalAlignment="Left" Width="138" VerticalAlignment="Bottom"/>
-        <local:TimeControl x:Name="UcPauseBegin" Margin="171,69,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="138" />
-        <local:TimeControl x:Name="UcPauseEnd" Margin="330,69,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="138" />
-        <local:TimeControl x:Name="UcEnd" Margin="491,69,0,0" HorizontalAlignment="Left" Width="138" Height="54" VerticalAlignment="Top" />
-        <Label Content="File to write into: " HorizontalAlignment="Left" Margin="222,155,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="labFilePath" Content="not found" HorizontalAlignment="Left" Margin="330,156,0,0" VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Width="299"/>
-        <Label Content="Backup file folder: " HorizontalAlignment="Left" Margin="222,187,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="labBackupFolder" Content="not found" HorizontalAlignment="Left" Margin="330,187,0,0" VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Width="299"/>
-        <Label Content="Broker file path: " HorizontalAlignment="Left" Margin="223,219,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="labBrokerFilePath" Content="not found" HorizontalAlignment="Left" Margin="331,219,0,0" VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Width="299"/>
+        <Button Content="Add time" HorizontalAlignment="Left" Margin="14,176,0,0" VerticalAlignment="Top" Height="59" Width="110" Click="Button_Click" Grid.ColumnSpan="3"/>
+        <DatePicker x:Name="Dp_Date" HorizontalAlignment="Right" Margin="0,0,500,217" VerticalAlignment="Bottom" Grid.ColumnSpan="3"/>
+        <local:TimeControl x:Name="UcStart" Margin="16,0,0,142" Height="53" HorizontalAlignment="Left" Width="138" VerticalAlignment="Bottom" Grid.ColumnSpan="3"/>
+        <local:TimeControl x:Name="UcPauseBegin" Margin="75,69,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="138" Grid.Column="2" />
+        <local:TimeControl x:Name="UcPauseEnd" Margin="234,69,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="138" Grid.Column="2" />
+        <local:TimeControl x:Name="UcEnd" Margin="395,69,0,0" HorizontalAlignment="Left" Width="138" Height="54" VerticalAlignment="Top" Grid.Column="2" />
+        <Label Content="File to write into: " HorizontalAlignment="Left" Margin="126,155,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label x:Name="labFilePath" Content="not found" HorizontalAlignment="Left" Margin="234,156,0,0" VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Width="299" Grid.Column="2"/>
+        <Label Content="Backup file folder: " HorizontalAlignment="Left" Margin="126,187,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label x:Name="labBackupFolder" Content="not found" HorizontalAlignment="Left" Margin="234,187,0,0" VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Width="299" Grid.Column="2"/>
+        <Label Content="Broker file path: " HorizontalAlignment="Left" Margin="127,219,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label x:Name="labBrokerFilePath" Content="not found" HorizontalAlignment="Left" Margin="235,219,0,0" VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Width="299" Grid.Column="2"/>
+        <TextBox x:Name="txtInsertTimes" TextWrapping="Wrap" Margin="269,25,33,218" BorderBrush="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Background="#FFEDDCDC" Foreground="#FF9C9999" Grid.Column="2" TextInput="txtInsertTimes_TextInput" TextChanged="txtInsertTimes_TextChanged" GotFocus="txtInsertTimes_GotFocus" LostFocus="txtInsertTimes_LostFocus"/>
+        <Label Content="Times from Excel:" HorizontalAlignment="Left" Margin="168,21,0,0" VerticalAlignment="Top" Grid.Column="2"/>
     </Grid>
 </Window>

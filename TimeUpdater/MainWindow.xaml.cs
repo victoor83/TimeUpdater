@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace TimeUpdater
@@ -12,6 +13,8 @@ namespace TimeUpdater
     public partial class MainWindow : Window
     {
         private FilesManager _filesManager;
+
+        private const string _INSERTTIMES_INFO = " Insert 4 Times from excel row";
 
         public MainWindow()
         {
@@ -24,6 +27,7 @@ namespace TimeUpdater
             labFilePath.Content = _filesManager.FilePaths.TimeFilePath;
             labBackupFolder.Content = _filesManager.FilePaths.BackupFileFolder;
             labBrokerFilePath.Content = _filesManager.FilePaths.BrokerTimeFile;
+            txtInsertTimes.Text = _INSERTTIMES_INFO;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -40,11 +44,12 @@ namespace TimeUpdater
             var workTime = TimeConverter.CalculateDailyTime(dateTimes);
 
             if(MessageBox.Show($"Save the date {datetime.Value:dd/MM/yyyy} with total working time {workTime} h ?", "Save these times", MessageBoxButton.YesNo,
-                MessageBoxImage.Question) == MessageBoxResult.Yes)
+                   MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                if (_filesManager.SaveTimesForSingleDay(TimeConverter.ConvertToUnixDateTime(dateTimes)))
+                if(_filesManager.SaveTimesForSingleDay(TimeConverter.ConvertToUnixDateTime(dateTimes)))
                 {
-                    MessageBox.Show($"Success for date {datetime.Value:dd/MM/yyyy}! Total working time is: {workTime} h.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Success for date {datetime.Value:dd/MM/yyyy}! Total working time is: {workTime} h.", "Info", MessageBoxButton.OK,
+                        MessageBoxImage.Information);
                 }
                 else
                 {
@@ -123,6 +128,60 @@ namespace TimeUpdater
                 Convert.ToInt32(UcEnd.cmbMinutes.Text), Convert.ToInt32(UcEnd.cmbSeconds.Text), DateTimeKind.Local);
 
             return new List<DateTime> {time1, time2, time3, time4};
+        }
+
+        private void txtInsertTimes_TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e) { }
+
+        private void txtInsertTimes_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            try
+            {
+                if(txtInsertTimes.Text != String.Empty && txtInsertTimes.Text != _INSERTTIMES_INFO)
+                {
+                    var arr = txtInsertTimes.Text.Split(" ").Where(x => x != "").ToList();
+                    if(arr.Count == 4)
+                    {
+                        //Start
+                        var hoursMinutes = TimeConverter.ConvertTimeToNumbers(arr[0]);
+                        UcStart.cmbHours.Text = hoursMinutes[0].ToString();
+                        UcStart.cmbMinutes.Text = hoursMinutes[1].ToString();
+
+                        //Pause begin
+                        hoursMinutes = TimeConverter.ConvertTimeToNumbers(arr[1]);
+                        UcPauseBegin.cmbHours.Text = hoursMinutes[0].ToString();
+                        UcPauseBegin.cmbMinutes.Text = hoursMinutes[1].ToString();
+
+                        //Pause end
+                        hoursMinutes = TimeConverter.ConvertTimeToNumbers(arr[2]);
+                        UcPauseEnd.cmbHours.Text = hoursMinutes[0].ToString();
+                        UcPauseEnd.cmbMinutes.Text = hoursMinutes[1].ToString();
+
+                        //End
+                        hoursMinutes = TimeConverter.ConvertTimeToNumbers(arr[3]);
+                        UcEnd.cmbHours.Text = hoursMinutes[0].ToString();
+                        UcEnd.cmbMinutes.Text = hoursMinutes[1].ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Times from excel: '" + txtInsertTimes.Text + "' have wrong format", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        txtInsertTimes.Text = "";
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void txtInsertTimes_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtInsertTimes.Text = "";
+        }
+
+        private void txtInsertTimes_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtInsertTimes.Text = _INSERTTIMES_INFO;
         }
     }
 }
