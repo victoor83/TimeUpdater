@@ -80,11 +80,10 @@ namespace TimeUpdater
         private void SetDefaultDate()
         {
             DateTime defaultDate = DateTime.Today.AddDays(-1);
-            DayOfWeek today = DateTime.Today.DayOfWeek;
 
             if(DateTime.Today.DayOfWeek == DayOfWeek.Monday)
             {
-                defaultDate.AddDays(-2); //if monday set last friday
+                defaultDate = defaultDate.AddDays(-2); //if monday set last friday
             }
 
             Dp_Date.SelectedDate = defaultDate;

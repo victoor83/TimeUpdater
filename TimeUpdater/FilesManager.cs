@@ -11,7 +11,7 @@ namespace TimeUpdater
 {
     public class FilesManager
     {
-        private const string ConfigFile = "config.json";
+        private const string _CONFIG_FILE = "config.json";
 
         public FilesManager()
         {
@@ -30,8 +30,9 @@ namespace TimeUpdater
                 List<string> lines = File.ReadAllLines(FilePaths.BrokerTimeFile).ToList();
 
                 int i = 0;
-                foreach (var dateTime in dateTimes)
+                foreach(var dateTime in dateTimes)
                 {
+                    //0 - start work  1 - start break  2- end break (start work time)  3 - end workday
                     TimeType timeType = (i == 0 || i == 2) ? TimeType.Start : TimeType.Stop;
 
                     lines.Insert(lines.Count - 1, GetTimeLine(dateTime, timeType));
@@ -61,7 +62,6 @@ namespace TimeUpdater
 
         private void CreateBackupFile()
         {
-   
             FileInfo fInfo = new FileInfo(Resources.ResourceManager.GetString("TimeFileName"));
             var fileName = Path.GetFileNameWithoutExtension(fInfo.Name);
 
@@ -73,7 +73,7 @@ namespace TimeUpdater
         {
             Paths paths = null;
             // deserialize JSON directly from a file
-            using(StreamReader file = File.OpenText(ConfigFile))
+            using(StreamReader file = File.OpenText(_CONFIG_FILE))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 paths = (Paths)serializer.Deserialize(file, typeof(Paths));
