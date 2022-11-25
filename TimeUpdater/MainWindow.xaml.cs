@@ -182,5 +182,40 @@ namespace TimeUpdater
         {
             txtInsertTimes.Text = _INSERTTIMES_INFO;
         }
+
+        private void btnOpenFolderFileToWriteInto_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFolder(labFilePath.Content.ToString());
+        }
+
+        private void btnOpenFolderBackupFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFolder(labBackupFolder.Content.ToString());
+        }
+
+        private void btnOpenFolderBrokerFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFolder(labBrokerFilePath.Content.ToString());
+        }
+
+        private void OpenFolder(string filePath)
+        {
+            try
+            {
+                string folderPath = Path.GetDirectoryName(filePath);
+                if(folderPath != null)
+                {
+                    Process.Start("explorer.exe", folderPath);
+                }
+                else
+                {
+                    MessageBox.Show($"Path {filePath} is wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show($"Path {filePath} is wrong. Exception message is {e.Message}", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
