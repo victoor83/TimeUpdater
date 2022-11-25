@@ -1,6 +1,6 @@
 # TimeUpdater
 Program with which you can 
-- add start work time, lunch break and work end time or copy & paste it from excel (4 Times)
+- 1) add times for: start work time, lunch break(start, end) and work end time OR 2) copy & paste it from excel (4 Times)
 - Than save it in unix time format to xml file for selected day.
 
-Background is that some companies use programs, these require to store working time like this
+Background is that some companies use work time programs, these are storing working time like this
