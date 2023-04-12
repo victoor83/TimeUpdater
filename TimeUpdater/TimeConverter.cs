@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Documents;
-using System.Windows.Navigation;
 
 namespace TimeUpdater
 {
-    public class TimeConverter
+    public static class TimeConverter
     {
         public static List<double> ConvertToUnixDateTime(List<DateTime> dateTimes)
         {

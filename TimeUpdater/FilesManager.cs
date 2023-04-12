@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Text.Json.Serialization;
 using System.Windows;
 using Newtonsoft.Json;
 
@@ -53,6 +51,15 @@ namespace TimeUpdater
             }
 
             return false;
+        }
+
+        public int GetLastSavedTime()
+        {
+            var lastLine = File.ReadLines(FilePaths.BrokerTimeFile).TakeLast(2).SkipLast(1).First();
+            //Get number (unix time)  from string
+            var unixTime = Convert.ToInt32(new string(lastLine.Where(char.IsDigit).ToArray()));
+
+            return unixTime;
         }
 
         private string GetTimeLine(double eventTime, TimeType timeType)

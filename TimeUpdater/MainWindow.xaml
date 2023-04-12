@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeUpdater"
         mc:Ignorable="d"
-        Title="Time Updater" SizeToContent="WidthAndHeight">
+        Title="Time Updater" SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize">
 
     <Grid Height="264" Width="662" >
         <Grid.ColumnDefinitions>
@@ -17,6 +18,7 @@
             <Menu DockPanel.Dock="Top" Background="White">
                 <MenuItem Header="_Actions">
                     <MenuItem Header="_Open excel time" Click="mnuExcel_Click"/>
+                    <MenuItem Header="_Check last saved time" Click="mnuLastTime_Click"/>
                     <Separator />
                     <MenuItem Header="_Exit" />
                 </MenuItem>

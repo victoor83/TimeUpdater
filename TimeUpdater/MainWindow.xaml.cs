@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -181,6 +182,13 @@ namespace TimeUpdater
         private void txtInsertTimes_LostFocus(object sender, RoutedEventArgs e)
         {
             txtInsertTimes.Text = _INSERTTIMES_INFO;
+        }
+
+        private void mnuLastTime_Click(object sender, RoutedEventArgs e)
+        {
+            var unixTime = _filesManager.GetLastSavedTime();
+            var lastTime = TimeConverter.ConvertUnixTimeToDateTime(unixTime);
+            MessageBox.Show(lastTime.ToString(CultureInfo.CurrentCulture), "Last saved time", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
