@@ -25,7 +25,7 @@
             </Menu>
         </DockPanel>
         <Button Content="Add time" HorizontalAlignment="Left" Margin="14,176,0,0" VerticalAlignment="Top" Height="59" Width="110" Click="Button_Click" Grid.ColumnSpan="3"/>
-        <DatePicker x:Name="Dp_Date" HorizontalAlignment="Right" Margin="0,0,500,217" VerticalAlignment="Bottom" Grid.ColumnSpan="3"/>
+        <DatePicker x:Name="Dp_Date" HorizontalAlignment="Right" Margin="0,0,508,208" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Width="134"/>
         <local:TimeControl x:Name="UcStart" Margin="16,0,0,142" Height="53" HorizontalAlignment="Left" Width="138" VerticalAlignment="Bottom" Grid.ColumnSpan="3"/>
         <local:TimeControl x:Name="UcPauseBegin" Margin="75,69,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="138" Grid.Column="2" />
         <local:TimeControl x:Name="UcPauseEnd" Margin="234,69,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="138" Grid.Column="2" />
@@ -36,10 +36,10 @@
         <Label x:Name="labBackupFolder" Content="not found" HorizontalAlignment="Left" Margin="234,187,0,0" VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Width="299" Grid.Column="2"/>
         <Label Content="Broker file path: " HorizontalAlignment="Left" Margin="127,219,0,0" VerticalAlignment="Top" Grid.Column="2"/>
         <Label x:Name="labBrokerFilePath" Content="not found" HorizontalAlignment="Left" Margin="235,219,0,0" VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Width="299" Grid.Column="2"/>
-        <TextBox x:Name="txtInsertTimes" TextWrapping="Wrap" Margin="269,25,33,218" BorderBrush="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Background="#FFEDDCDC" Foreground="#FF9C9999" Grid.Column="2" TextInput="txtInsertTimes_TextInput" TextChanged="txtInsertTimes_TextChanged" GotFocus="txtInsertTimes_GotFocus" LostFocus="txtInsertTimes_LostFocus"/>
-        <Label Content="Times from Excel:" HorizontalAlignment="Left" Margin="168,21,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-		<Button x:Name="btnOpenFolderFileToWriteInto" Content="..." Grid.Column="2" Margin="538,158,10,83" Click="btnOpenFolderFileToWriteInto_Click"/>
-		<Button x:Name="btnOpenFolderBackupFile" Content="..." Grid.Column="2" Margin="538,189,10,52" Click="btnOpenFolderBackupFile_Click"/>
-		<Button x:Name="btnOpenFolderBrokerFile" Content="..." Grid.Column="2" Margin="538,221,10,20" Click="btnOpenFolderBrokerFile_Click"/>
-	</Grid>
+        <TextBox x:Name="txtInsertTimes" TextWrapping="Wrap" Margin="269,34,33,209" BorderBrush="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Background="#FFEDDCDC" Foreground="#FF9C9999" Grid.Column="2" TextInput="txtInsertTimes_TextInput" TextChanged="txtInsertTimes_TextChanged" GotFocus="txtInsertTimes_GotFocus" LostFocus="txtInsertTimes_LostFocus"/>
+        <Label Content="Times from Excel:" HorizontalAlignment="Left" Margin="168,30,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Button x:Name="btnOpenFolderFileToWriteInto" Content="..." Grid.Column="2" Margin="538,158,10,83" Click="btnOpenFolderFileToWriteInto_Click"/>
+        <Button x:Name="btnOpenFolderBackupFile" Content="..." Grid.Column="2" Margin="538,189,10,52" Click="btnOpenFolderBackupFile_Click"/>
+        <Button x:Name="btnOpenFolderBrokerFile" Content="..." Grid.Column="2" Margin="538,221,10,20" Click="btnOpenFolderBrokerFile_Click"/>
+    </Grid>
 </Window>
