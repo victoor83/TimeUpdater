@@ -38,5 +38,8 @@
         <Label x:Name="labBrokerFilePath" Content="not found" HorizontalAlignment="Left" Margin="235,219,0,0" VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Width="299" Grid.Column="2"/>
         <TextBox x:Name="txtInsertTimes" TextWrapping="Wrap" Margin="269,25,33,218" BorderBrush="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Background="#FFEDDCDC" Foreground="#FF9C9999" Grid.Column="2" TextInput="txtInsertTimes_TextInput" TextChanged="txtInsertTimes_TextChanged" GotFocus="txtInsertTimes_GotFocus" LostFocus="txtInsertTimes_LostFocus"/>
         <Label Content="Times from Excel:" HorizontalAlignment="Left" Margin="168,21,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-    </Grid>
+		<Button x:Name="btnOpenFolderFileToWriteInto" Content="..." Grid.Column="2" Margin="538,158,10,83" Click="btnOpenFolderFileToWriteInto_Click"/>
+		<Button x:Name="btnOpenFolderBackupFile" Content="..." Grid.Column="2" Margin="538,189,10,52" Click="btnOpenFolderBackupFile_Click"/>
+		<Button x:Name="btnOpenFolderBrokerFile" Content="..." Grid.Column="2" Margin="538,221,10,20" Click="btnOpenFolderBrokerFile_Click"/>
+	</Grid>
 </Window>
