@@ -21,10 +21,9 @@ namespace TimeUpdater
 
         public static DateTime ConvertUnixTimeToDateTime(double unixDateTime)
         {
-            var timespan = TimeSpan.FromSeconds(unixDateTime);
-            var localDateTime = new DateTime(timespan.Ticks).ToLocalTime();
-
-            return localDateTime;
+            DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            DateTime dateTime = epoch.AddSeconds(unixDateTime).ToLocalTime();
+            return dateTime;
         }
 
         public static double CalculateDailyTime(List<DateTime> dateTimes)
