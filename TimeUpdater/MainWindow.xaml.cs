@@ -222,8 +222,11 @@ namespace TimeUpdater
         private void mnuLastTime_Click(object sender, RoutedEventArgs e)
         {
             var unixTime = _filesManager.GetLastSavedTime();
-            var lastTime = TimeConverter.ConvertUnixTimeToDateTime(unixTime);
-            MessageBox.Show(lastTime.ToString(CultureInfo.CurrentCulture), "Last saved time", MessageBoxButton.OK, MessageBoxImage.Information);
+            if(unixTime > 0)
+            {
+                var lastTime = TimeConverter.ConvertUnixTimeToDateTime(unixTime);
+                MessageBox.Show(lastTime.ToString(CultureInfo.CurrentCulture), "Last saved time", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

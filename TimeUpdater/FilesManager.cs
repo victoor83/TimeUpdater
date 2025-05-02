@@ -55,6 +55,12 @@ namespace TimeUpdater
 
         public int GetLastSavedTime()
         {
+            if(!File.Exists(FilePaths.BrokerTimeFile))
+            {
+                MessageBox.Show($"File '{FilePaths.BrokerTimeFile}' doesn't exists.");
+                return -1;
+            }
+
             var lastLine = File.ReadLines(FilePaths.BrokerTimeFile).TakeLast(2).SkipLast(1).First();
             //Get number (unix time)  from string
             var unixTime = Convert.ToInt32(new string(lastLine.Where(char.IsDigit).ToArray()));
