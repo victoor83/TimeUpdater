@@ -23,6 +23,7 @@ namespace TimeUpdater
 
             SetDefaultTimes();
             SetDefaultDate();
+            SetProjects();
 
             _filesManager = new FilesManager();
             labFilePath.Content = _filesManager.FilePaths.TimeFilePath;
@@ -34,10 +35,17 @@ namespace TimeUpdater
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var datetime = Dp_Date.SelectedDate;
+            var projectName = comboProject.Text;
 
             if(datetime == null)
             {
                 MessageBox.Show("Date is not selected.", "Time error", MessageBoxButton.OK, MessageBoxImage.Hand);
+                return;
+            }
+
+            if(string.IsNullOrEmpty(projectName))
+            {
+                MessageBox.Show("Project is not selected.", "Project error", MessageBoxButton.OK, MessageBoxImage.Hand);
                 return;
             }
 
@@ -47,7 +55,7 @@ namespace TimeUpdater
             if(MessageBox.Show($"Save the date {datetime.Value:dd/MM/yyyy} with total working time {workTime} h ?", "Save these times", MessageBoxButton.YesNo,
                    MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                if(_filesManager.SaveTimesForSingleDay(TimeConverter.ConvertToUnixDateTime(dateTimes)))
+                if(_filesManager.SaveTimesForSingleDay(TimeConverter.ConvertToUnixDateTime(dateTimes), projectName))
                 {
                     MessageBox.Show($"Success for date {datetime.Value:dd/MM/yyyy}! Total working time is: {workTime} h.", "Info", MessageBoxButton.OK,
                         MessageBoxImage.Information);
@@ -107,6 +115,11 @@ namespace TimeUpdater
             UcEnd.SetCaption("End");
             UcEnd.cmbHours.Text = 16.ToString();
             UcEnd.cmbMinutes.Text = 0.ToString();
+        }
+
+        private void SetProjects()
+        {
+            comboProject.ItemsSource = ProjectManager.GetProjectNames();
         }
 
         private List<DateTime> GetDateTimes()

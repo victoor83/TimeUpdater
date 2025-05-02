@@ -18,7 +18,7 @@ namespace TimeUpdater
 
         public Paths FilePaths { get; }
 
-        public bool SaveTimesForSingleDay(List<double> dateTimes)
+        public bool SaveTimesForSingleDay(List<double> dateTimes, string projectName)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace TimeUpdater
                     //0 - start work  1 - start break  2- end break (start work time)  3 - end workday
                     TimeType timeType = (i == 0 || i == 2) ? TimeType.Start : TimeType.Stop;
 
-                    lines.Insert(lines.Count - 1, GetTimeLine(dateTime, timeType));
+                    lines.Insert(lines.Count - 1, GetTimeLine(dateTime, timeType, projectName));
 
                     i++;
                 }
@@ -68,9 +68,9 @@ namespace TimeUpdater
             return unixTime;
         }
 
-        private string GetTimeLine(double eventTime, TimeType timeType)
+        private string GetTimeLine(double eventTime, TimeType timeType, string projectType)
         {
-            return $"<Event time = '{eventTime}' type='{timeType}' description='Magnus'/>";
+            return $"<Event time = '{eventTime}' type='{timeType}' description='{projectType}'/>";
         }
 
         private void CreateBackupFile()
